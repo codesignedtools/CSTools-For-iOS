@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CardView: UIView {
+class CSCardView: UIView {
 
     private var stackView = UIStackView(arrangedSubviews: [])
 
