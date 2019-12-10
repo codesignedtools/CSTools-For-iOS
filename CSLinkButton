@@ -1,0 +1,56 @@
+//
+//  CSLinkButton.swift
+//  Micro Wave
+//
+//  Created by Jordan Jackson on 12/9/19.
+//  Copyright © 2019 Perium. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class CSLinkButton: UIButton {
+    
+    private var underline: UIView?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUpButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setUpButton()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        setUpButton()
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            setTitleColor(.black, for: .highlighted)
+            underline?.backgroundColor = isHighlighted ? UIColor.blue : UIColor.clear
+        }
+    }
+    
+    private func setUpUnderline() {
+        guard let titleLabel = titleLabel else { return }
+        let underlineView = UIView(frame: .zero)
+        addSubview(underlineView)
+        underlineView.translatesAutoresizingMaskIntoConstraints = false
+        underlineView.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor).isActive = true
+        underlineView.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2).isActive = true
+        underlineView.widthAnchor.constraint(equalTo: titleLabel.widthAnchor).isActive = true
+        underlineView.heightAnchor.constraint(equalTo: titleLabel.heightAnchor).isActive = true
+        
+        self.underline = underlineView
+    }
+    
+    private func setUpButton() {
+        setUpUnderline()
+        titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        setTitleColor(.black, for: .normal)
+        backgroundColor = .clear
+    }
+}
